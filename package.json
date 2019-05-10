@@ -1,20 +1,28 @@
 {
   "name": "awesome-cep",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/cep.test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raniellyferreira/awesome-cep.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cep",
+    "address",
+    "endereco",
+    "ibge"
+  ],
+  "author": "Ranielly Ferreira <eu@raniellyferreira.com.br>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/raniellyferreira/awesome-cep/issues"
   },
-  "homepage": "https://github.com/raniellyferreira/awesome-cep#readme"
+  "homepage": "https://github.com/raniellyferreira/awesome-cep#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
