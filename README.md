@@ -10,6 +10,7 @@ AwesomeCEP tem o proposito de oferecer um serviço simples e funcional.
 
 ```js
 const cep = require('awesome-cep');
+
 cep.findCEP('05424020', function (error, cepData) {
   console.error('error:', error); // Print the error if one occurred
   console.log('errorCode:', error && error.errorCode); // Print the error code ex.: invalid OR not_found
@@ -22,7 +23,7 @@ let cepData = await cep.findCEP('05424020')
 
 ### Response
 
-```json
+```js
 { 
   cep: '05424020',
   address_type: 'Rua',
