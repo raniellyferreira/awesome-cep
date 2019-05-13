@@ -6,7 +6,7 @@ $ npm i -S awesome-cep
 ```
 
 ## Uso simples
-AwesomeCEP tem o proposito de oferecer um serviço simples e funcional.
+AwesomeCEP tem o proposito de oferecer um serviço simples e funcional. Fonte https://docs.awesomeapi.com.br/api-cep
 
 ```js
 const cep = require('awesome-cep');
