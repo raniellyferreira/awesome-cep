@@ -20,7 +20,8 @@ module.exports.findCEP = (cep, callback = null) => {
             headers: {
                 'User-Agent': 'Request-promise; awesome-cep.npm',
                 'User-Key': '3fc2702b68b95b00e61ceacdea4536eac3c911b4'
-            }
+            },
+            json: true
         }, (err, resp, body) => {
             if(resp.statusCode >= 400) {
                 switch(+resp.statusCode) {
@@ -35,7 +36,7 @@ module.exports.findCEP = (cep, callback = null) => {
                 }
             }
             try {
-                resolve(JSON.parse(body));
+                useCB ? callback(null, body) : resolve(body);
             } catch(err){
                 useCB ? callback(err) : reject(err);
             }
