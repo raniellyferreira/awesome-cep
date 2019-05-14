@@ -21,4 +21,11 @@ const cep = require('../index');
         console.error('CEP find error');
         console.error(err);
     }
+
+    try {
+        console.log(await cep.findCEP('0542410'))
+    } catch(err) {
+        console.error('CEP find error');
+        console.error(err);
+    }
 })()

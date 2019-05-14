@@ -7,12 +7,13 @@ module.exports.strip = cep => cep.replace(/[^\d]/g,'');
 
 module.exports.findCEP = (cep, callback = null) => {
     const useCB = typeof callback == "function";
-    
-    if(!cep) return useCB ? callback({message: 'CEP inválido', code: 400, errorCode: 'invalid'}) : Promise.reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
-    cep = this.strip(cep);
-    if(!this.isValid(cep)) return useCB ? callback({ message: 'CEP inválido', code: 400, errorCode: 'invalid' }) : Promise.reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
 
     return new Promise((resolve, reject) => {
+
+        if(!cep) return useCB ? callback({message: 'CEP inválido', code: 400, errorCode: 'invalid'}) : reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
+        cep = this.strip(cep);
+        if(!this.isValid(cep)) return useCB ? callback({ message: 'CEP inválido', code: 400, errorCode: 'invalid' }) : reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
+
         request({
             uri: `https://cep.awesomeapi.com.br/json/${cep}?r=npm`,
             method: 'GET',
