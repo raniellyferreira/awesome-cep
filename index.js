@@ -35,11 +35,8 @@ module.exports.findCEP = (cep, callback = null) => {
                         return useCB ? callback(err) : reject(err);
                 }
             }
-            try {
-                useCB ? callback(null, body) : resolve(body);
-            } catch(err){
-                useCB ? callback(err) : reject(err);
-            }
+            
+            useCB ? callback(null, body) : resolve(body);
         })
     })
 }
