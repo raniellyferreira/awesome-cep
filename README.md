@@ -1,12 +1,12 @@
-# AwesomeCEP Node.js
+# AwesomeAPI CEP
 
 ## Instalação
 ```sh
-$ npm i -S awesome-cep
+$ npm i awesome-cep
 ```
 
 ## Uso simples
-AwesomeCEP tem o proposito de oferecer um serviço simples e funcional. Fonte https://docs.awesomeapi.com.br/api-cep
+AwesomeAPI tem o proposito de oferecer um serviço simples e funcional. Fonte https://docs.awesomeapi.com.br/api-cep
 
 ```js
 const cep = require('awesome-cep');
