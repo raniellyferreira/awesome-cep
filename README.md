@@ -11,14 +11,11 @@ AwesomeCEP tem o proposito de oferecer um serviço simples e funcional. Fonte ht
 ```js
 const cep = require('awesome-cep');
 
-cep.findCEP('05424020', function (error, cepData) {
-  console.error('error:', error); // Print the error if one occurred
-  console.log('errorCode:', error && error.errorCode); // Print the error code ex.: invalid OR not_found
-  console.log('cepData:', cepData); // Print de json with cep data
-});
+cep.findCEP('05424020').then(resp => {
+  
+  console.log(resp.address_name); // ~~> Professor Carlos Reis
 
-// OR promise
-let cepData = await cep.findCEP('05424020')
+}).catch(console.error)
 ```
 
 ### Response

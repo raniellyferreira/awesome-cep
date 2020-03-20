@@ -1,42 +1,51 @@
 'use strict';
-const request = require('request');
+const axios = require('axios');
 
-module.exports.isValid = cep => /^[\d]{5}-?[\d]{3}$/.test(cep);
+const isValid = cep => /^[\d]{5}-?[\d]{3}$/.test(cep);
 
-module.exports.strip = cep => cep.replace(/[^\d]/g,'');
+const strip = cep => cep.replace(/[^\d]/g,'');
 
-module.exports.findCEP = (cep, callback = null) => {
-    const useCB = typeof callback == "function";
+const findCEP = async (cep) => {
+    const cepNumber = strip(cep);
 
     return new Promise((resolve, reject) => {
 
-        if(!cep) return useCB ? callback({message: 'CEP inválido', code: 400, errorCode: 'invalid'}) : reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
-        cep = this.strip(cep);
-        if(!this.isValid(cep)) return useCB ? callback({ message: 'CEP inválido', code: 400, errorCode: 'invalid' }) : reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
+        if (!cepNumber) {
+            return reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
+        }
+    
+        if(!isValid(cepNumber)) {
+            return reject({message: 'CEP inválido', code: 400, errorCode: 'invalid'});
+        }
 
-        request({
-            uri: `https://cep.awesomeapi.com.br/json/${cep}?r=npm`,
+        axios({
+            url: `https://cep.awesomeapi.com.br/json/${cepNumber}?r=npm`,
             method: 'GET',
             headers: {
                 'User-Agent': 'Request-promise; awesome-cep.npm',
                 'User-Key': '3fc2702b68b95b00e61ceacdea4536eac3c911b4'
-            },
-            json: true
-        }, (err, resp, body) => {
-            if(resp.statusCode >= 400) {
-                switch(+resp.statusCode) {
-                    case 404:
-                        return useCB ? callback({ message: `CEP não encontrado`, code: 404, errorCode: 'not_found' }) : reject({ message: `CEP não encontrado`, code: 404, errorCode: 'not_found' });
-                    
-                    case 400:
-                        return useCB ? callback({ message: `CEP inválido`, code: 400, errorCode: 'invalid' }) : reject({ message: `CEP inválido`, code: 400, errorCode: 'invalid' });
-        
-                    default:
-                        return useCB ? callback(err) : reject(err);
-                }
             }
-            
-            useCB ? callback(null, body) : resolve(body);
-        })
+        }).then(({ data }) => {
+            resolve(data);
+        }).catch((err) => {
+            const  { response: { status, data } } = err;
+
+            switch(status) {
+                case 404:
+                    return reject({ message: `CEP não encontrado`, code: 404, errorCode: 'not_found' });
+                
+                case 400:
+                    return reject({ message: `CEP inválido`, code: 400, errorCode: 'invalid' });
+    
+                default:
+                    return reject(err);
+            }
+        });
     })
+}
+
+module.exports = {
+    strip,
+    isValid,
+    findCEP
 }

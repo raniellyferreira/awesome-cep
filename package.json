@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/raniellyferreira/awesome-cep#readme",
   "dependencies": {
-    "request": "^2.88.0"
+    "axios": "^0.19.2"
   }
 }
