@@ -26,6 +26,7 @@ cep.findCEP('05424020').then(resp => {
   address_type: 'Rua',
   address_name: 'Professor Carlos Reis',
   address: 'Rua Professor Carlos Reis',
+  state: 'SP',
   district: 'Pinheiros',
   city: 'São Paulo',
   state: 'SP',
