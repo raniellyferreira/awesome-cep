@@ -1,6 +1,7 @@
 # AwesomeAPI CEP
 
 ## Instalação
+via [npm](https://www.npmjs.com/package/awesome-cep) :package:
 ```sh
 $ npm i awesome-cep
 ```
